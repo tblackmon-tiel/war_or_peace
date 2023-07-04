@@ -17,7 +17,7 @@ class Deck
 
   def percent_high_ranking
     # round to 4 decimals and multiply by 100 to convert to percentage
-    100*(high_ranking_cards.size.to_f / @cards.size.to_f).round(4)
+    100 * (high_ranking_cards.size.to_f / @cards.size.to_f).round(4)
   end
 
   def remove_card
