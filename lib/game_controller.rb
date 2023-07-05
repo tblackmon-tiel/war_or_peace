@@ -12,7 +12,7 @@ class GameController
 
   def start
     p "Welcome to War! (or Peace) This game will be played with 52 cards."
-    p "The players today are #{self.player1.name} and #{self.player2.name}."
+    p "The players today are #{@player1.name} and #{@player2.name}."
     p "Type 'GO' to start the game!"
 
     go = gets.chomp!
@@ -28,19 +28,19 @@ class GameController
 
     until @player1.has_lost? == true || @player2.has_lost? == true || turn_counter >= 1000000 do
       # debug stuff
-      # debug_array1 = player1.deck.cards.map do |card|
+      # debug_array1 = @player1.deck.cards.map do |card|
       #   card.value
       # end
       # print "Player 1: "
       # p debug_array1
 
-      # debug_array2 = player2.deck.cards.map do |card|
+      # debug_array2 = @player2.deck.cards.map do |card|
       #   card.value
       # end
       # print "Player 2: "
       # p debug_array2
 
-      current_turn = Turn.new(self.player1, self.player2)
+      current_turn = Turn.new(@player1, @player2)
       winner = current_turn.winner
       current_turn.pile_cards
       print "Turn #{turn_counter}: "
@@ -60,12 +60,12 @@ class GameController
       turn_counter += 1
     end
 
-    if player1.has_lost? == true
-      p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
-    elsif player2.has_lost? == true
-      p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
+    if @player1.has_lost? == true
+      p "*~*~*~* #{@player2.name} has won the game! *~*~*~*"
+    elsif @player2.has_lost? == true
+      p "*~*~*~* #{@player1.name} has won the game! *~*~*~*"
     else
-      p "*~*~*~* DRAW! #{player1.name} had #{player1.deck.cards.size} cards remaining, and #{player2.name} had #{player2.deck.cards.size} cards remaining."
+      p "*~*~*~* DRAW! #{@player1.name} had #{@player1.deck.cards.size} cards remaining, and #{@player2.name} had #{@player2.deck.cards.size} cards remaining."
     end
   end
 end
