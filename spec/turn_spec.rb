@@ -122,8 +122,12 @@ RSpec.describe Turn do
     turn.pile_cards
     turn.award_spoils(winner)
 
-    expect(turn.player1.deck.cards).to eq([card2, card5, card8, card1, card3])
-    expect(turn.player2.deck.cards).to eq([card4, card6, card7])
+    # this format breaks with shuffling introduced
+    # expect(turn.player1.deck.cards).to eq([card2, card5, card8, card1, card3])
+    # expect(turn.player2.deck.cards).to eq([card4, card6, card7])
+
+    expect(turn.player1.deck.cards.size).to eq(5)
+    expect(turn.player2.deck.cards.size).to eq(3)
   end
 
   it 'can have a turn type of :war' do
@@ -221,8 +225,12 @@ RSpec.describe Turn do
     turn.pile_cards
     turn.award_spoils(winner)
 
-    expect(turn.player1.deck.cards).to eq([card8])
-    expect(turn.player2.deck.cards).to eq([card7, card1, card2, card5, card4, card3, card6])
+    # this format breaks with shuffling introduced
+    # expect(turn.player1.deck.cards).to eq([card8])
+    # expect(turn.player2.deck.cards).to eq([card7, card1, card2, card5, card4, card3, card6])
+
+    expect(turn.player1.deck.cards.size).to eq(1)
+    expect(turn.player2.deck.cards.size).to eq(7)
   end
 
   it 'can have a :mutually_assured_destruction type turn' do
