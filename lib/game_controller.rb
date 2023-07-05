@@ -15,6 +15,15 @@ class GameController
     p "The players today are #{self.player1.name} and #{self.player2.name}."
     p "Type 'GO' to start the game!"
 
+    go = gets.chomp!
+    while go != 'GO'
+      if go == 'exit'
+        exit()
+      end
+      p "Type 'GO' to start the game, or 'exit' to quit!"
+      go = gets.chomp!
+    end
+
     turn_counter = 1
 
     until @player1.has_lost? == true || @player2.has_lost? == true || turn_counter >= 1000000 do
