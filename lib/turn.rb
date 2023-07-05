@@ -9,17 +9,31 @@ class Turn
   end
 
   def set_type
-    player1_card1 = @player1.deck.rank_of_card_at(0)
-    player1_card3 = @player1.deck.rank_of_card_at(2)
-    player2_card1 = @player2.deck.rank_of_card_at(0)
-    player2_card3 = @player2.deck.rank_of_card_at(2)
+    # player1_card1 = @player1.deck.rank_of_card_at(0)
+    # player1_card3 = @player1.deck.rank_of_card_at(2)
+    # player2_card1 = @player2.deck.rank_of_card_at(0)
+    # player2_card3 = @player2.deck.rank_of_card_at(2)
 
-    if player1_card1 != player2_card1
+    # if player1_card1 != player2_card1
+    #   :basic
+    # elsif (player1_card1 == player2_card1) && (player1_card3 == player2_card3)
+    #   :mutually_assured_destruction
+    # else
+    #   :war
+    # end
+
+    if @player1.deck.rank_of_card_at(0) != @player2.deck.rank_of_card_at(0)
       :basic
-    elsif (player1_card1 == player2_card1) && (player1_card3 == player2_card3)
-      :mutually_assured_destruction
     else
-      :war
+      if @player1.deck.cards.size >= 3 && @player2.deck.cards.size >= 3
+        if @player1.deck.rank_of_card_at(2) != @player2.deck.rank_of_card_at(2)
+          :war
+        else
+          :mutually_assured_destruction
+        end
+      else
+        :final_war
+      end
     end
   end
 
@@ -38,6 +52,13 @@ class Turn
         @player2
       end
 
+    elsif @type == :final_war
+      if @player1.deck.cards.size < 3
+        @player2
+      else
+        @player1
+      end
+      
     else
       'No Winner.'
     end
@@ -50,6 +71,12 @@ class Turn
     elsif @type == :war
       3.times {@spoils_of_war << @player1.deck.cards.shift}
       3.times {@spoils_of_war << @player2.deck.cards.shift}
+    elsif @type == :final_war
+      if @player1.deck.cards.size < 3
+        @player1.deck.cards.clear
+      else
+        @player2.deck.cards.clear
+      end
     else
       3.times {@player1.deck.cards.shift}
       3.times {@player2.deck.cards.shift}
