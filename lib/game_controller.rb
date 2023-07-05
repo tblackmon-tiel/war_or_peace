@@ -17,7 +17,20 @@ class GameController
 
     turn_counter = 1
 
-    until @player1.has_lost? == true || @player2.has_lost? == true || turn_counter >= 1000000 do
+    until @player1.has_lost? == true || @player2.has_lost? == true || turn_counter >= 5000000 do
+      #debug stuff
+      debug_array1 = player1.deck.cards.map do |card|
+        card.value
+      end
+      print "Player 1: "
+      p debug_array1
+
+      debug_array2 = player2.deck.cards.map do |card|
+        card.value
+      end
+      print "Player 2: "
+      p debug_array2
+
       current_turn = Turn.new(self.player1, self.player2)
       winner = current_turn.winner
       current_turn.pile_cards
@@ -35,13 +48,15 @@ class GameController
         p "*mutually assured destruction* 6 cards removed from play"
       end
 
-      if player1.has_lost? == true
-        p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
-      elsif player2.has_lost? == true
-        p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
-      end
-
       turn_counter += 1
+    end
+
+    if player1.has_lost? == true
+      p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
+    elsif player2.has_lost? == true
+      p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
+    else
+      p "*~*~*~* DRAW! #{player1.name} had #{player1.deck.cards.size} cards remaining, and #{player2.name} had #{player2.deck.cards.size} cards remaining."
     end
   end
 end
