@@ -75,6 +75,11 @@ end
 deck1 = Deck.new(deck1_cards)
 deck2 = Deck.new(deck2_cards)
 
+# use these for debugging
+# debug_deck1 = Deck.new([card_club1, card_club2, card_club3, card_heart10, card_heart5, card_heart12])
+# debug_deck2 = Deck.new([card_diamond1, card_diamond10, card_diamond3, card_spade4, card_spade12, card_club12])
+
+
 player1 = Player.new('Player 1', deck1)
 player2 = Player.new('Player 2', deck2)
 

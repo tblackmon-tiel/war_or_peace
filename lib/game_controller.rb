@@ -17,19 +17,19 @@ class GameController
 
     turn_counter = 1
 
-    until @player1.has_lost? == true || @player2.has_lost? == true || turn_counter >= 5000000 do
-      #debug stuff
-      debug_array1 = player1.deck.cards.map do |card|
-        card.value
-      end
-      print "Player 1: "
-      p debug_array1
+    until @player1.has_lost? == true || @player2.has_lost? == true || turn_counter >= 1000000 do
+      # debug stuff
+      # debug_array1 = player1.deck.cards.map do |card|
+      #   card.value
+      # end
+      # print "Player 1: "
+      # p debug_array1
 
-      debug_array2 = player2.deck.cards.map do |card|
-        card.value
-      end
-      print "Player 2: "
-      p debug_array2
+      # debug_array2 = player2.deck.cards.map do |card|
+      #   card.value
+      # end
+      # print "Player 2: "
+      # p debug_array2
 
       current_turn = Turn.new(self.player1, self.player2)
       winner = current_turn.winner
